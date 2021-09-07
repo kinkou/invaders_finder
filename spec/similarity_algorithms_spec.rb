@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.describe 'Similarity algorithms' do
+  describe InvadersFinder::SimilarityAlgorithms::Base do
+    specify '#to_percent converts similarity to percent' do
+      expect(subject.to_percent(0.5)).to eq(50.0)
+    end
+  end
+
   context 'Subclasses' do
     let(:pattern) { '-o-o---' }
     let(:sample_a) { '-o-o---' }
