@@ -8,6 +8,12 @@ RSpec.describe InvadersFinder::TextBlock do
       it 'Normalizes the input data' do
         expect(text_block.to_a).to eq(%w[-o])
       end
+
+      it 'Assigns a :name attribute' do
+        name = :block
+        block = InvadersFinder::TextBlock.new('', name)
+        expect(block.name).to eq(name)
+      end
     end
 
     let(:simple_test_data) do

@@ -5,9 +5,13 @@ module InvadersFinder
   class TextBlock
     InvalidDimensionsError = Class.new(StandardError)
 
+    attr_reader :name
+
     # @param string [String]
+    # @param name [Symbol]
     def initialize(string, name = nil)
       @data = string
+      @name = name
       prepare
     end
 
@@ -100,9 +104,10 @@ module InvadersFinder
     end
 
     # @param self_data [Array<String>]
+    # @param self_name [Symbol]
     # @return [InvadersFinder::TextBlock]
-    def new_self(self_data)
-      self.class.new(self_data.compact.join(NEWLINE))
+    def new_self(self_data, self_name = @name)
+      self.class.new(self_data.compact.join(NEWLINE), self_name)
     end
   end
 end
