@@ -23,3 +23,6 @@ Style/HashTransformValues:
 AllCops:
   Exclude:
     - 'spec/**/*'
+
+Layout/LineLength:
+  Max: 90
