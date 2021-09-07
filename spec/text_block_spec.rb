@@ -35,5 +35,24 @@ RSpec.describe InvadersFinder::TextBlock do
     specify '#dimensions returns [width, height]' do
       expect(simple_text_block.dimensions).to eq([2, 2])
     end
+
+    let(:padded_text_block) do
+      horizontal_size = 1
+      vertical_size = 1
+      simple_text_block.pad(horizontal_size, vertical_size)
+    end
+
+    let(:padded_text_block_expectation) do
+      %w[
+        xxxx
+        xabx
+        xcdx
+        xxxx
+      ]
+    end
+
+    specify '#pad adds margins with a pad character around the text block' do
+      expect(padded_text_block.to_a).to eq(padded_text_block_expectation)
+    end
   end
 end
