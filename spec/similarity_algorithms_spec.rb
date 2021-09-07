@@ -16,5 +16,16 @@ RSpec.describe 'Similarity algorithms' do
         expect(subject.threshold).to eq(0.65)
       end
     end
+
+    describe InvadersFinder::SimilarityAlgorithms::WhiteSimilarity do
+      specify '#compare calculates similarity between two strings in the range of [0.0, 1.0]' do
+        expect(subject.compare(pattern, sample_a)).to eq(1)
+        expect(subject.compare(pattern, sample_b)).to eq(0.833)
+      end
+
+      specify '#threshold returns an algorithm-specific match threshold' do
+        expect(subject.threshold).to eq(0.82)
+      end
+    end
   end
 end
