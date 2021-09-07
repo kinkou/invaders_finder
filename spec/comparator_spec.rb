@@ -17,6 +17,14 @@ RSpec.describe InvadersFinder::Comparator do
 
     let(:levenshtein_algorithm) { InvadersFinder::SimilarityAlgorithms::Levenshtein.new }
 
+    specify '#new raises if the sample and the pattern have different dimensions' do
+      text_block_a = InvadersFinder::TextBlock.new('-')
+      text_block_b = InvadersFinder::TextBlock.new('--')
+      comparator = InvadersFinder::Comparator
+      error = InvadersFinder::Comparator::InvalidDimensionsError
+      expect { comparator.new(text_block_a, text_block_b, levenshtein_algorithm) }.to raise_error(error)
+    end
+
     context 'Using Levenshtein algorithm' do
       specify '#execute detects 100% similarity between two identical text blocks' do
         comparator = InvadersFinder::Comparator.new(real_pattern, real_pattern, levenshtein_algorithm)

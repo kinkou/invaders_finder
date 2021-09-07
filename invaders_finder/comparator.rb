@@ -6,17 +6,21 @@ module InvadersFinder
     RESULT_SCALE = 3
     private_constant :RESULT_SCALE
 
+    InvalidDimensionsError = Class.new(StandardError)
+
     # @param text_block_a [InvadersFinder::TextBlock]
     # @param text_block_b [InvadersFinder::TextBlock]
     # @param similarity_algorithm [InvadersFinder::SimilarityAlgorithms::Base]
+    # @raise [InvadersFinder::Comparator::InvalidDimensionsError]
     def initialize(text_block_a, text_block_b, similarity_algorithm)
       @text_block_a = text_block_a
       @text_block_b = text_block_b
+      raise InvalidDimensionsError if @text_block_a.dimensions != @text_block_b.dimensions
+
       @algorithm = similarity_algorithm
     end
 
     # @return [Float]
-    # @raise [InvadersFinder::Comparator::InvalidDimensionsError]
     def execute
       data_a = @text_block_a.to_a
       data_b = @text_block_b.to_a
