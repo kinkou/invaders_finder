@@ -36,5 +36,17 @@ RSpec.describe InvadersFinder::Comparator do
         expect(comparator.execute).to eq(0.854)
       end
     end
+
+    context 'Using WhiteSimilarity algorithm' do
+      specify '#execute detects 100% similarity between two identical text blocks' do
+        comparator = InvadersFinder::Comparator.new(real_pattern, real_pattern, white_similarity_algorithm)
+        expect(comparator.execute).to eq(1.0)
+      end
+
+      specify '#execute detects 82% similarity between a radar sample and a pattern' do
+        comparator = InvadersFinder::Comparator.new(subsample, real_pattern, white_similarity_algorithm)
+        expect(comparator.execute).to eq(0.825)
+      end
+    end
   end
 end
