@@ -58,10 +58,10 @@ To detect invaders we will guilelessly move a frame of the size of an invader pa
 4 - --o- o--
 ```
 
-If the resulting similarity is above a certain threshold, we will assume that we have detected an invader to a certain degree of probability and print out the coordinates, the similarity index and the subsample for the radar operator.
+If the resulting similarity is above a certain threshold, we will assume that we have detected an invader and print out the coordinates of the subsample within the radar sample data, the similarity index and the subsample 'image', for the radar operator to decide whether he/she should shoot lasers at it or not.
 
 ## Dealing with the edge cases
-When we get a subsample where only a part of an invader is seen, we will need to cut the edges of an invader pattern so that it would correspond to the subsample:
+When we take a subsample where only a part of an invader is seen, we need to 'cut off' a part of an invader pattern so that the comparison would be made between the corresponding strings:
 
 ```
 Subsample      Adjusted pattern
@@ -71,29 +71,27 @@ o-o-oo         oooooo
 --------------------- edge of the radar sample
 ```
 
-To avoid complex calculations we can simply add a padding around our radar sample filled with a symbol that is not used in both the sample and the pattern data, `x` for example. The width of the padding on each side will be equal to the ½ of the width of the pattern, and the height of the padding ½ of the height of the pattern.
-
-In this case, when we do the subsampling, we will capture at least ½ of the potential invader which is hiding behind the edge:
+To avoid complex adjustments to the scanning frame, we can simply add a padding around our radar sample filled with a symbol that is not used in both the sample and the pattern, for instance `x`. We'll set the width of the padding on each side of the sample to ½ of the pattern's width, and the height to ½ of the pattern's height. In this case, when we'll do the subsampling, we will capture at least ½ of the potential 'hiding' invader:
 
 ```
 Subsample  Pattern
---oo--     --oo--
--oo-o-     -oooo-
-o-o-oo     oooooo
+--oo-x     --oo--
+-oo-ox     -oooo-
+o-o-ox     oooooo
 xxxxxx      o--o
 xxxxxx     o----o
 ```
 
-Since the size of the subsampling frame is always equal to the size of the pattern that we're searching for, if we delete the `x`s in the subsample and characters in the pattern at the positions that correspond to `x`s in the subsample, we will get the new versions of both that can be correctly compared:
+Since the size of the subsampling frame is now equal to the size of the pattern, if we delete the `x`s in the subsample _and_ characters in the pattern at the same positions, we will have the versions of both that can be correctly compared:
 
 ```
 Subsample    Pattern
---oo--  <=>  --oo--
--oo-o-  <=>  -oooo-
-o-o-oo  <=>  oooooo
+--oo-  <=>  --oo-
+-oo-o  <=>  -oooo
+o-o-o  <=>  ooooo
 ```
 
-It probably doesn't make sense to compare sections that are less than ¼ of a pattern since the resolution of the sample data is quite low already and we might get a lot of false matches. This is the reason why we should pad the radar sample to no more than ½ of a pattern's width/height.
+It probably doesn't make sense to compare sections that are less than ¼ of a pattern area since the resolution of the sample data is quite low already and we might get a lot of false matches. This is the reason why we should pad the radar sample to no more than ½ of a pattern's width/height.
 
 ## How the app is designed
 The main building block of the app is `InvadersFinder::TextBlock`. It wraps a block of text (a radar sample, a subsample of it, or a pattern) in a form of an array of strings and does basic operations on it, like telling dimensions, taking a subsample at a certain position, padding it with `x`s, unpadding it (removing the `x`s), intersecting itself with another text block (see 'Dealing with the edge cases').
