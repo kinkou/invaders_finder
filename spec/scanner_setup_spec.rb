@@ -48,6 +48,13 @@ RSpec.describe InvadersFinder::ScannerSetup do
     specify '#steps_down calculates how many moves downwards the scanning frame will make' do
       expect(scanner_setup.steps_down).to eq(51)
     end
-  end
 
+    specify '#unpad_offset_x calculates the 1-based horizontal offset disregarding the padding' do
+      expect(scanner_setup.unpad_offset_x(50)).to eq(45)
+    end
+
+    specify '#unpad_offset_y calculates the 1-based horizontal offset disregarding the padding' do
+      expect(scanner_setup.unpad_offset_y(20)).to eq(17)
+    end
+  end
 end

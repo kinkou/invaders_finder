@@ -46,5 +46,17 @@ module InvadersFinder
     def steps_down
       @sample.height + vertical_pad_size * 2 - @pattern.height + 1
     end
+
+    # @param offset_x [Integer]
+    # @return [Integer]
+    def unpad_offset_x(offset_x)
+      offset_x - horizontal_pad_size + 1
+    end
+
+    # @param offset_y [Integer]
+    # @return [Integer]
+    def unpad_offset_y(offset_y)
+      offset_y - vertical_pad_size + 1
+    end
   end
 end
