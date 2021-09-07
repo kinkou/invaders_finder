@@ -10,8 +10,11 @@ RSpec.describe InvadersFinder::Match do
       InvadersFinder::Match.new(image, similarity, offset_x, offset_y)
     end
 
-    specify '#log logs the match' do
-      expect(match_object).to respond_to(:log)
+    specify '#log logs the match using a logger object' do
+      logger = spy('InvadersFinder::ScreenLogger')
+      stub_const('InvadersFinder::LOGGER', logger)
+      match_object.log
+      expect(logger).to have_received(:log).at_least(:once)
     end
   end
 end

@@ -16,6 +16,11 @@ module InvadersFinder
 
     # @return [nil]
     def log
+      LOGGER.log(@image.join("\n"), :cyan)
+      LOGGER.log("Similarity: ~#{@similarity}%", :yellow)
+      LOGGER.log("Y: #{@offset_y}", :yellow)
+      LOGGER.log("X: #{@offset_x}", :yellow)
+      LOGGER.log("\n")
     end
   end
 end

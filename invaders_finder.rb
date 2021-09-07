@@ -12,6 +12,7 @@ module InvadersFinder
   require_relative 'invaders_finder/scanner_setup.rb'
   require_relative 'invaders_finder/match.rb'
   require_relative 'invaders_finder/scanner.rb'
+  require_relative 'invaders_finder/screen_logger.rb'
 
   PAD_CHAR = 'x' # Used to pad the sample data, to detect patterns at edges
   NEWLINE = "\n" # System-specific line separator
