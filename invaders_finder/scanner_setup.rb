@@ -16,5 +16,15 @@ module InvadersFinder
       @sample = sample
       @pattern = pattern
     end
+
+    # @return [Integer]
+    def frame_width
+      @pattern.width
+    end
+
+    # @return [Integer]
+    def frame_height
+      @pattern.height
+    end
   end
 end

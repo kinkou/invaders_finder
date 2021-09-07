@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'real_data_helper.rb'
+RSpec.configure { |c| c.include(RealDataHelper) }
+
 RSpec.describe InvadersFinder::ScannerSetup do
   context 'InvadersFinder::ScannerSetup::InvalidDimensionsError exception' do
     let(:exception) { InvadersFinder::ScannerSetup::InvalidDimensionsError }
@@ -18,4 +21,17 @@ RSpec.describe InvadersFinder::ScannerSetup do
       expect { InvadersFinder::ScannerSetup.new(sample, pattern) }.to raise_exception(exception)
     end
   end
+
+  context 'Instance methods' do
+    let(:scanner_setup) { InvadersFinder::ScannerSetup.new(real_sample, real_pattern) }
+
+    specify '#frame_width returns the scanning frame width' do
+      expect(scanner_setup.frame_width).to eq(11)
+    end
+
+    specify '#frame_height returns the scanning frame height' do
+      expect(scanner_setup.frame_height).to eq(8)
+    end
+  end
+
 end
