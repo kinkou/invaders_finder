@@ -59,5 +59,12 @@ RSpec.describe InvadersFinder::TextBlock do
       expect(padded_text_block.unpad.to_a).to eq(simple_text_block.to_a)
       expect(InvadersFinder::TextBlock.new("x\nx").unpad.to_a).to eq([])
     end
+
+    let(:subsample_expectation) { %w[d] }
+
+    specify '#subsample_at copies a certain text area to a new instance' do
+      result = simple_text_block.subsample_at(1, 1, 3, 3).to_a
+      expect(result).to eq(subsample_expectation)
+    end
   end
 end

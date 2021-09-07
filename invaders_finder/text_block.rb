@@ -55,6 +55,22 @@ module InvadersFinder
       new_self(new_data)
     end
 
+    # @param offset_x [Integer]
+    # @param offset_y [Integer]
+    # @param columns [Integer]
+    # @param lines [Integer]
+    # @return [InvadersFinder::TextBlock]
+    def subsample_at(offset_x, offset_y, columns, lines)
+      subsample = []
+
+      lines.times do |line_number|
+        line = to_a[offset_y + line_number]
+        subsample << line.slice(offset_x, columns) if line
+      end
+
+      new_self(subsample)
+    end
+
     private
 
     # @return [Array<String>]
