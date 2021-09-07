@@ -3,6 +3,8 @@
 module InvadersFinder
   # Performs basic operations on a rectangular block of text
   class TextBlock
+    InvalidDimensionsError = Class.new(StandardError)
+
     # @param string [String]
     def initialize(string, name = nil)
       @data = string
@@ -69,6 +71,25 @@ module InvadersFinder
       end
 
       new_self(subsample)
+    end
+
+    # @param text_block [InvadersFinder::TextBlock]
+    # @return [Array<InvadersFinder::TextBlock>]
+    # @raise [InvadersFinder::TextBlock::InvalidDimensionsError]
+    def intersect_with(text_block) # rubocop:disable Metrics/AbcSize
+      raise InvalidDimensionsError if dimensions != text_block.dimensions
+
+      data_a = to_a.dup
+      data_b = text_block.to_a.dup
+
+      height.times do |line|
+        width.times do |column|
+          data_a[line][column] = PAD_CHAR if data_b[line][column] == PAD_CHAR
+          data_b[line][column] = PAD_CHAR if data_a[line][column] == PAD_CHAR
+        end
+      end
+
+      [data_a, data_b].map { |item| new_self(item).unpad }
     end
 
     private

@@ -66,5 +66,47 @@ RSpec.describe InvadersFinder::TextBlock do
       result = simple_text_block.subsample_at(1, 1, 3, 3).to_a
       expect(result).to eq(subsample_expectation)
     end
+
+    context '#intersect_with' do
+      it 'Raises if the sample and the pattern have different dimensions' do
+        error = InvadersFinder::TextBlock::InvalidDimensionsError
+        expect { simple_text_block.intersect_with(padded_text_block) }.to raise_error(error)
+      end
+
+      let(:intersect_pattern_data) do
+        <<~STR
+          o--o
+          -oo-
+          oooo
+          ----
+        STR
+      end
+
+      let(:intersect_pattern) { InvadersFinder::TextBlock.new(intersect_pattern_data) }
+
+      let(:intersect_sample_expectation) do
+        %w[
+          ab
+          cd
+        ]
+      end
+
+      let(:intersect_pattern_expectation) do
+        %w[
+          oo
+          oo
+        ]
+      end
+
+      it 'overlays sample and pattern and removes padded area in both, regardless of the order of parameters' do
+        sample, pattern = padded_text_block.intersect_with(intersect_pattern)
+        expect(sample.to_a).to eq(intersect_sample_expectation)
+        expect(pattern.to_a).to eq(intersect_pattern_expectation)
+
+        pattern, sample = intersect_pattern.intersect_with(padded_text_block)
+        expect(sample.to_a).to eq(intersect_sample_expectation)
+        expect(pattern.to_a).to eq(intersect_pattern_expectation)
+      end
+    end
   end
 end
