@@ -49,6 +49,12 @@ module InvadersFinder
       new_self(padded_data)
     end
 
+    # @return [InvadersFinder::TextBlock]
+    def unpad
+      new_data = to_a.map { |line| line.delete(PAD_CHAR) }.reject(&:empty?)
+      new_self(new_data)
+    end
+
     private
 
     # @return [Array<String>]

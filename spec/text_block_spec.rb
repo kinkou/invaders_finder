@@ -54,5 +54,10 @@ RSpec.describe InvadersFinder::TextBlock do
     specify '#pad adds margins with a pad character around the text block' do
       expect(padded_text_block.to_a).to eq(padded_text_block_expectation)
     end
+
+    specify '#unpad removes the margins' do
+      expect(padded_text_block.unpad.to_a).to eq(simple_text_block.to_a)
+      expect(InvadersFinder::TextBlock.new("x\nx").unpad.to_a).to eq([])
+    end
   end
 end
