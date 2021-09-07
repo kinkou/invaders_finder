@@ -32,6 +32,14 @@ RSpec.describe InvadersFinder::ScannerSetup do
     specify '#frame_height returns the scanning frame height' do
       expect(scanner_setup.frame_height).to eq(8)
     end
+
+    specify '#horizontal_pad_size calculates how much to pad the sample horizontally' do
+      expect(scanner_setup.horizontal_pad_size).to eq(6)
+    end
+
+    specify '#vertical_pad_size calculates how much to pad the sample vertically' do
+      expect(scanner_setup.vertical_pad_size).to eq(4)
+    end
   end
 
 end

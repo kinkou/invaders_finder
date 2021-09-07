@@ -26,5 +26,15 @@ module InvadersFinder
     def frame_height
       @pattern.height
     end
+
+    # @return [Integer]
+    def horizontal_pad_size
+      (@pattern.width / 2.0).ceil
+    end
+
+    # @return [Integer]
+    def vertical_pad_size
+      (@pattern.height / 2.0).ceil
+    end
   end
 end
