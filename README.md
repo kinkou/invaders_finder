@@ -65,7 +65,6 @@ When we get a subsample where only a part of an invader is seen, we will need to
 
 ```
 Subsample      Adjusted pattern
-o-----
 --oo--     =>  --oo--
 -oo-o-         -oooo-
 o-o-oo         oooooo
