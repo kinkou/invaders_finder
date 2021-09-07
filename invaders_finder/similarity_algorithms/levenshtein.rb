@@ -4,12 +4,10 @@ module InvadersFinder
   module SimilarityAlgorithms
     # Pluggable Damerau-Levenshtein algorithm
     class Levenshtein < Base
+      require 'damerau-levenshtein'
+
       THRESHOLD = 0.65
       private_constant :THRESHOLD
-
-      def initialize
-        require 'damerau-levenshtein' unless defined?(::DamerauLevenshtein)
-      end
 
       # @result [Float]
       def threshold

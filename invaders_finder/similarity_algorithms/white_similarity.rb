@@ -4,12 +4,10 @@ module InvadersFinder
   module SimilarityAlgorithms
     # Pluggable White Similarity algorithm
     class WhiteSimilarity < Base
+      require 'whitesimilarity'
+
       THRESHOLD = 0.82
       private_constant :THRESHOLD
-
-      def initialize
-        require 'whitesimilarity' unless defined?(::WhiteSimilarity)
-      end
 
       # @result [Float]
       def threshold
