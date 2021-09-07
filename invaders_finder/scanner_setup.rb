@@ -36,5 +36,15 @@ module InvadersFinder
     def vertical_pad_size
       (@pattern.height / 2.0).ceil
     end
+
+    # @return [Integer]
+    def steps_right
+      @sample.width + horizontal_pad_size * 2 - @pattern.width + 1
+    end
+
+    # @return [Integer]
+    def steps_down
+      @sample.height + vertical_pad_size * 2 - @pattern.height + 1
+    end
   end
 end

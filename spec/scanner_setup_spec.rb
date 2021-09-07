@@ -40,6 +40,14 @@ RSpec.describe InvadersFinder::ScannerSetup do
     specify '#vertical_pad_size calculates how much to pad the sample vertically' do
       expect(scanner_setup.vertical_pad_size).to eq(4)
     end
+
+    specify '#steps_right calculates how many moves to the right the scanning frame will make' do
+      expect(scanner_setup.steps_right).to eq(102)
+    end
+
+    specify '#steps_down calculates how many moves downwards the scanning frame will make' do
+      expect(scanner_setup.steps_down).to eq(51)
+    end
   end
 
 end
