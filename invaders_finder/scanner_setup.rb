@@ -9,7 +9,7 @@ module InvadersFinder
     # @param pattern [InvadersFinder::TextBlock]
     # @raise [InvadersFinder::ScannerSetup::InvalidDimensionsError]
     def initialize(sample, pattern)
-      if sample.height != pattern.height || sample.width != pattern.width
+      if sample.height < pattern.height || sample.width < pattern.width
         raise InvalidDimensionsError
       end
 
