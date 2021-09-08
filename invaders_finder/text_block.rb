@@ -83,6 +83,12 @@ module InvadersFinder
     def intersect_with(text_block) # rubocop:disable Metrics/AbcSize
       raise InvalidDimensionsError if dimensions != text_block.dimensions
 
+      # @note #dup creates a shallow copy which means that the strings
+      # in the original objects will also be mutated:
+      # a = ['test']
+      # b = a.dup
+      # b[0][0] = 'n'
+      # p a #=> ['nest']
       data_a = to_a.dup
       data_b = text_block.to_a.dup
 
