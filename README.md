@@ -1,5 +1,5 @@
 # Development assignment
-The presented solution is by no means optimal in terms of performance or memory consumption. I believe there are clever solutions to the problem of the space invader detection, however I will give my thoughts on a possible alternative approach.
+The presented solution is by no means optimal in terms of performance or memory consumption. I believe there are more clever solutions to the problem of the space invader detection, however I will give my thoughts on a possible alternative approach.
 
 ## How to run
 ```
