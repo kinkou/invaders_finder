@@ -85,7 +85,7 @@ xxxxxx     o----o
 Since the size of the subsampling frame is now equal to the size of the pattern, if we delete the `x`s in the subsample _and_ characters in the pattern at the same positions, we will have the versions of both that can be correctly compared:
 
 ```
-Subsample    Pattern
+Subsample   Pattern
 --oo-  <=>  --oo-
 -oo-o  <=>  -oooo
 o-o-o  <=>  ooooo
