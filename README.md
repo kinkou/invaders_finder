@@ -49,8 +49,8 @@ To detect invaders we will guilelessly move a frame of the size of an invader pa
 
 ```
   0 1234 567
-0 - -o-- --o    Subsample     Original
-   ┌────┐       at (1, 1)     sample      Similarity  Threshold
+0 - -o-- --o    Subsample
+   ┌────┐       at (1, 1)     Pattern     Similarity  Threshold
 1 -│-o--│-o- => -o--      <=> -oo-     => 0.5    <=>  0.75      => Not an
 2 -│--o-│--o    --o-          -oo-                                 invader,
    └────┘                                                          probably
